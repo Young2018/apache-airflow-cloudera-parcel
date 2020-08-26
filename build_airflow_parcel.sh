@@ -19,7 +19,7 @@ if [ -n "$DEBUG" ]; then set -x; fi
 ##### START CONFIG ###################################################
 
 ##### STOP CONFIG ####################################################
-PATH=/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin
+PATH=/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin:$PATH
 
 # Function to print the help screen.
 print_help() {
@@ -98,9 +98,9 @@ for FILE in meta/*json; do
 done
 
 echo "*** Validating parcel files ..."
-java -jar ../../cloudera/cm_ext/validator/target/validator.jar -a meta/alternatives.json
-java -jar ../../cloudera/cm_ext/validator/target/validator.jar -p meta/parcel.json
-java -jar ../../cloudera/cm_ext/validator/target/validator.jar -r meta/permissions.json
+java -jar ../cloudera/cm_ext/validator/target/validator.jar -a meta/alternatives.json
+java -jar ../cloudera/cm_ext/validator/target/validator.jar -p meta/parcel.json
+java -jar ../cloudera/cm_ext/validator/target/validator.jar -r meta/permissions.json
 
 if command -v wget; then
   GET="wget -c"
@@ -124,7 +124,7 @@ if [ ! -f crudini ]; then
 fi
 if [ ! -d target ]; then mkdir target; fi
 
-for DIST in centos6 centos7 debian8 ubuntu1404 ubuntu1604 ubuntu1804; do
+for DIST in centos7 ; do
   case $DIST in
     centos6)    PARCEL_DIST=el6    ;;
     centos7)    PARCEL_DIST=el7    ;;
