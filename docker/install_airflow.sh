@@ -12,6 +12,7 @@ PIPOPTS=""
 export AIRFLOW_GPL_UNIDECODE=yes
 
 echo "** Installing numpy."
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 pip $PIPOPTS install numpy
 echo "** Installing setuptools."
 pip $PIPOPTS install -U setuptools
@@ -35,7 +36,7 @@ pip $PIPOPTS install 'apache-airflow[mysql]'
 echo "** Installing Airflow[postgres]."
 pip $PIPOPTS install 'apache-airflow[postgres]'
 echo "** Installing Airflow[kerberos]."
-pip $PIPOPTS install 'apache-airflow[kerberos]'
+#pip $PIPOPTS install 'apache-airflow[kerberos]'
 echo "** Installing Airflow[crypto]."
 pip $PIPOPTS install 'apache-airflow[crypto]'
 echo "** Installing Airflow[hive]."
