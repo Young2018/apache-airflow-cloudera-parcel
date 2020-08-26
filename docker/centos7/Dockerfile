@@ -25,7 +25,7 @@ RUN yum -y -e1 -d1 install readline-devel \
                            cyrus-sasl-devel.x86_64 \
                            mysql-devel \
                            postgresql-devel \
-                           libpqxx-devel
+                           libpqxx-devel \
     && yum clean all
 
 ARG AIRFLOW_VERSION
@@ -49,7 +49,7 @@ RUN mkdir -p ${INSTALL_DIR}/${PARCEL_NAME} && \
 
 COPY get-pip.py /BUILD/get-pip.py
 RUN PYVER=$(echo $PYTHON_VERSION | awk -F. '{print $1"."$2}') && \
-    ${INSTALL_DIR}/${PARCEL_NAME}/bin/python${PYVER} /BUILD/get-pip.py
+    ${INSTALL_DIR}/${PARCEL_NAME}/bin/python${PYVER} /BUILD/get-pip.py -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 COPY docker/install_airflow.sh /BUILD/
 RUN bash -x /BUILD/install_airflow.sh
